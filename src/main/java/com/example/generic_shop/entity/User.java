@@ -2,8 +2,8 @@ package com.example.generic_shop.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tbl_user")
