@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductServiceImpl productService;
-    private final ProductRepository productRepository;
 
     @GetMapping
     public ResponseEntity<List<Product>> getAllProduct(){
@@ -25,10 +24,12 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id){
-        return productRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<?> getProductById(@PathVariable Long id){
+        try {
+            return ResponseEntity.ok(productService.getById(id));
+        } catch (RuntimeException e){
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
     }
 
     @PostMapping
