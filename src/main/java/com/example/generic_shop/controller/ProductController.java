@@ -34,6 +34,26 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
-        return new ResponseEntity<>(productService.createProduct(product), HttpStatus.CREATED);
+        return ResponseEntity.status(201).body(productService.createProduct(product));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product product){
+        try {
+            return ResponseEntity.ok(productService.updateProduct(id, product));
+        } catch (RuntimeException e){
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id){
+        try {
+            productService.deleteProduct(id);
+            return ResponseEntity.ok("Deleted successfully");
+        } catch (RuntimeException e){
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
+
 }
