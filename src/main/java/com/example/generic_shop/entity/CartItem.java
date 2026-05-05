@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tbl_cart_item")
@@ -22,10 +22,6 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
