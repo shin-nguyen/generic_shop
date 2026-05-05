@@ -1,6 +1,7 @@
 package com.example.generic_shop.controller;
 
 
+import com.example.generic_shop.dto.ChangePasswordRequest;
 import com.example.generic_shop.dto.LoginRequest;
 import com.example.generic_shop.entity.User;
 import com.example.generic_shop.service.Impl.UserServiceImpl;
@@ -26,5 +27,10 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request){
         return userService.login(request);
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request){
+        return userService.changePassword(request);
     }
 }
